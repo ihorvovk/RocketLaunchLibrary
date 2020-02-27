@@ -11,6 +11,9 @@
 		584F04232404411800F3E2B7 /* RocketLaunchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584F04222404411800F3E2B7 /* RocketLaunchList.swift */; };
 		584F04262404476C00F3E2B7 /* LaunchListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584F04252404476C00F3E2B7 /* LaunchListViewController.swift */; };
 		584F04282404539700F3E2B7 /* LaunchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584F04272404539700F3E2B7 /* LaunchTableViewCell.swift */; };
+		A25CFDAF2406E5EB0054C642 /* LaunchDetailsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A25CFDAE2406E5EB0054C642 /* LaunchDetailsViewController.storyboard */; };
+		A25CFDB32406E6540054C642 /* LaunchDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25CFDB22406E6540054C642 /* LaunchDetailsViewController.swift */; };
+		A25CFDB52406EC540054C642 /* LaunchDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25CFDB42406EC540054C642 /* LaunchDetailsViewModel.swift */; };
 		FD8E394D23FB08920029E836 /* RocketLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8E394C23FB08920029E836 /* RocketLaunch.swift */; };
 		FD8E394F23FB099F0029E836 /* Rocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8E394E23FB099F0029E836 /* Rocket.swift */; };
 		FD8E395223FB18210029E836 /* LaunchLibraryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8E395123FB18210029E836 /* LaunchLibraryManager.swift */; };
@@ -28,6 +31,9 @@
 		584F04222404411800F3E2B7 /* RocketLaunchList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketLaunchList.swift; sourceTree = "<group>"; };
 		584F04252404476C00F3E2B7 /* LaunchListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchListViewController.swift; sourceTree = "<group>"; };
 		584F04272404539700F3E2B7 /* LaunchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchTableViewCell.swift; sourceTree = "<group>"; };
+		A25CFDAE2406E5EB0054C642 /* LaunchDetailsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchDetailsViewController.storyboard; sourceTree = "<group>"; };
+		A25CFDB22406E6540054C642 /* LaunchDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchDetailsViewController.swift; sourceTree = "<group>"; };
+		A25CFDB42406EC540054C642 /* LaunchDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchDetailsViewModel.swift; sourceTree = "<group>"; };
 		C1E98227436E5057C456EB85 /* Pods-RocketLaunchLibrary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RocketLaunchLibrary.debug.xcconfig"; path = "Target Support Files/Pods-RocketLaunchLibrary/Pods-RocketLaunchLibrary.debug.xcconfig"; sourceTree = "<group>"; };
 		FD8E394C23FB08920029E836 /* RocketLaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketLaunch.swift; sourceTree = "<group>"; };
 		FD8E394E23FB099F0029E836 /* Rocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rocket.swift; sourceTree = "<group>"; };
@@ -70,6 +76,16 @@
 				584F04272404539700F3E2B7 /* LaunchTableViewCell.swift */,
 			);
 			path = RocketLaunchList;
+			sourceTree = "<group>";
+		};
+		A25CFDAD2406E2BA0054C642 /* RocketLaunchDetails */ = {
+			isa = PBXGroup;
+			children = (
+				A25CFDAE2406E5EB0054C642 /* LaunchDetailsViewController.storyboard */,
+				A25CFDB22406E6540054C642 /* LaunchDetailsViewController.swift */,
+				A25CFDB42406EC540054C642 /* LaunchDetailsViewModel.swift */,
+			);
+			path = RocketLaunchDetails;
 			sourceTree = "<group>";
 		};
 		C7D0FF76152934DB87BC52CC /* Pods */ = {
@@ -126,6 +142,7 @@
 				FD9942E823FB036600E9F851 /* AppDelegate.swift */,
 				FD9942EA23FB036600E9F851 /* SceneDelegate.swift */,
 				FD9942EC23FB036600E9F851 /* ViewController.swift */,
+				A25CFDAD2406E2BA0054C642 /* RocketLaunchDetails */,
 				FD9942F123FB036B00E9F851 /* Assets.xcassets */,
 				FD9942F323FB036B00E9F851 /* LaunchScreen.storyboard */,
 				FD9942F623FB036B00E9F851 /* Info.plist */,
@@ -194,6 +211,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD9942F523FB036B00E9F851 /* LaunchScreen.storyboard in Resources */,
+				A25CFDAF2406E5EB0054C642 /* LaunchDetailsViewController.storyboard in Resources */,
 				FD9942F223FB036B00E9F851 /* Assets.xcassets in Resources */,
 				FD9942F023FB036600E9F851 /* LaunchListViewController.storyboard in Resources */,
 			);
@@ -252,10 +270,12 @@
 				FD9942ED23FB036600E9F851 /* ViewController.swift in Sources */,
 				584F04232404411800F3E2B7 /* RocketLaunchList.swift in Sources */,
 				FD9942E923FB036600E9F851 /* AppDelegate.swift in Sources */,
+				A25CFDB52406EC540054C642 /* LaunchDetailsViewModel.swift in Sources */,
 				FD8E394F23FB099F0029E836 /* Rocket.swift in Sources */,
 				FD8E395223FB18210029E836 /* LaunchLibraryManager.swift in Sources */,
 				FD9942EB23FB036600E9F851 /* SceneDelegate.swift in Sources */,
 				584F04282404539700F3E2B7 /* LaunchTableViewCell.swift in Sources */,
+				A25CFDB32406E6540054C642 /* LaunchDetailsViewController.swift in Sources */,
 				584F04262404476C00F3E2B7 /* LaunchListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
