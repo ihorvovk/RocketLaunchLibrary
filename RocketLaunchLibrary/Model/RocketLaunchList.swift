@@ -7,17 +7,34 @@
 //
 
 import Foundation
+import CoreData
 
-struct RocketLaunchList: Decodable {
+final class RocketLaunchList: NSManagedObject, Decodable {
     
-    let launches: [RocketLaunch]
+    @NSManaged var launches: NSOrderedSet
+    
+    var launchesArray: [RocketLaunch] {
+        return launches.array as? [RocketLaunch] ?? []
+    }
     
     enum CodingKeys: String, CodingKey {
         case launches
     }
     
-    init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
+        guard let managedObjectContextKey = CodingUserInfoKey(rawValue: "managedObjectContext"),
+            let managedObjectContext = decoder.userInfo[managedObjectContextKey] as? NSManagedObjectContext,
+            let entity = NSEntityDescription.entity(forEntityName: "RocketLaunchList", in: managedObjectContext) else {
+            fatalError("Failed to decode RocketLaunchList")
+        }
+
+        self.init(entity: entity, insertInto: managedObjectContext)
+        
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        launches = try container.decode([RocketLaunch].self, forKey: .launches)
+        launches = try NSOrderedSet(array: container.decode([RocketLaunch].self, forKey: .launches))
+    }
+    
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<RocketLaunchList> {
+        return NSFetchRequest<RocketLaunchList>(entityName: "RocketLaunchList")
     }
 }

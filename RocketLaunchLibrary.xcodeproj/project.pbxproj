@@ -14,6 +14,7 @@
 		A25CFDAF2406E5EB0054C642 /* LaunchDetailsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A25CFDAE2406E5EB0054C642 /* LaunchDetailsViewController.storyboard */; };
 		A25CFDB32406E6540054C642 /* LaunchDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25CFDB22406E6540054C642 /* LaunchDetailsViewController.swift */; };
 		A25CFDB52406EC540054C642 /* LaunchDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25CFDB42406EC540054C642 /* LaunchDetailsViewModel.swift */; };
+		A25CFDB8240B13E70054C642 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A25CFDB6240B13E70054C642 /* Model.xcdatamodeld */; };
 		FD8E394D23FB08920029E836 /* RocketLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8E394C23FB08920029E836 /* RocketLaunch.swift */; };
 		FD8E394F23FB099F0029E836 /* Rocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8E394E23FB099F0029E836 /* Rocket.swift */; };
 		FD8E395223FB18210029E836 /* LaunchLibraryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8E395123FB18210029E836 /* LaunchLibraryManager.swift */; };
@@ -34,6 +35,8 @@
 		A25CFDAE2406E5EB0054C642 /* LaunchDetailsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchDetailsViewController.storyboard; sourceTree = "<group>"; };
 		A25CFDB22406E6540054C642 /* LaunchDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchDetailsViewController.swift; sourceTree = "<group>"; };
 		A25CFDB42406EC540054C642 /* LaunchDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchDetailsViewModel.swift; sourceTree = "<group>"; };
+		A25CFDB7240B13E70054C642 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		A25CFDFC240D807C0054C642 /* Model 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 2.xcdatamodel"; sourceTree = "<group>"; };
 		C1E98227436E5057C456EB85 /* Pods-RocketLaunchLibrary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RocketLaunchLibrary.debug.xcconfig"; path = "Target Support Files/Pods-RocketLaunchLibrary/Pods-RocketLaunchLibrary.debug.xcconfig"; sourceTree = "<group>"; };
 		FD8E394C23FB08920029E836 /* RocketLaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketLaunch.swift; sourceTree = "<group>"; };
 		FD8E394E23FB099F0029E836 /* Rocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rocket.swift; sourceTree = "<group>"; };
@@ -103,6 +106,7 @@
 				584F04222404411800F3E2B7 /* RocketLaunchList.swift */,
 				FD8E394C23FB08920029E836 /* RocketLaunch.swift */,
 				FD8E394E23FB099F0029E836 /* Rocket.swift */,
+				A25CFDB6240B13E70054C642 /* Model.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -277,6 +281,7 @@
 				584F04282404539700F3E2B7 /* LaunchTableViewCell.swift in Sources */,
 				A25CFDB32406E6540054C642 /* LaunchDetailsViewController.swift in Sources */,
 				584F04262404476C00F3E2B7 /* LaunchListViewController.swift in Sources */,
+				A25CFDB8240B13E70054C642 /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,6 +481,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A25CFDB6240B13E70054C642 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A25CFDFC240D807C0054C642 /* Model 2.xcdatamodel */,
+				A25CFDB7240B13E70054C642 /* Model.xcdatamodel */,
+			);
+			currentVersion = A25CFDFC240D807C0054C642 /* Model 2.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = FD9942DD23FB036500E9F851 /* Project object */;
 }

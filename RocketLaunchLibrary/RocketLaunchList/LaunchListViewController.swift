@@ -7,17 +7,37 @@
 //
 
 import UIKit
+import CoreData
 
 class LaunchListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        var rocketLaunch = RocketLaunch(context: appDelegate.persistentContainer.viewContext)
+//        rocketLaunch.id = 123
+//        appDelegate.saveContext()
+//
+//        var fetchRequest: NSFetchRequest<RocketLaunch> = RocketLaunch.fetchRequest()
+//        fetchRequest.predicate = NSPredicate(format: "id = 123")
+//        rocketLaunch = try! appDelegate.persistentContainer.viewContext.fetch(fetchRequest).first as! RocketLaunch
+//
+//        rocketLaunch.name = "name"
+//        appDelegate.saveContext()
+         
+        
+        let fetchRequest: NSFetchRequest<RocketLaunch> = RocketLaunch.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: appDelegate.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchResultsController.delegate = self
+        
+        try? fetchResultsController.performFetch()
+        updateLaunches()
+        
         LaunchLibraryManager.shared.loadRocketLaunches(success: { [weak self] launches in
-            guard let `self` = self else { return }
-            
-            self.rocketLaunches = launches
-            self.tableView.reloadData()
         }) { error in
             print(error.localizedDescription)
         }
@@ -36,9 +56,15 @@ class LaunchListViewController: UIViewController {
 
     // MARK: - Implementation
     
+    private func updateLaunches() {
+        rocketLaunches = fetchResultsController.fetchedObjects
+        tableView.reloadData()
+    }
+    
     @IBOutlet weak var tableView: UITableView!
     
     private var rocketLaunches: [RocketLaunch]?
+    private var fetchResultsController: NSFetchedResultsController<RocketLaunch>!
 }
 
 extension LaunchListViewController: UITableViewDataSource {
@@ -52,5 +78,12 @@ extension LaunchListViewController: UITableViewDataSource {
         cell.fill(launch: rocketLaunches![indexPath.row])
         
         return cell
+    }
+}
+
+extension LaunchListViewController: NSFetchedResultsControllerDelegate {
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        updateLaunches()
     }
 }

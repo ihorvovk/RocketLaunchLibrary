@@ -7,13 +7,14 @@
 //
 
 import Foundation
+import CoreData
 
-struct Rocket: Decodable {
+final class Rocket: NSManagedObject, Decodable {
     
-    let id: Int
-    let name: String?
-    let imageURL: String?
-    let wikiURL: String?
+    @NSManaged var id: Int
+    @NSManaged var name: String?
+    @NSManaged var imageURL: String?
+    @NSManaged var wikiURL: String?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -22,7 +23,15 @@ struct Rocket: Decodable {
         case wikiURL
     }
     
-    init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
+        guard let managedObjectContextKey = CodingUserInfoKey(rawValue: "managedObjectContext"),
+            let managedObjectContext = decoder.userInfo[managedObjectContextKey] as? NSManagedObjectContext,
+            let entity = NSEntityDescription.entity(forEntityName: "Rocket", in: managedObjectContext) else {
+            fatalError("Failed to decode Rocket")
+        }
+        
+        self.init(entity: entity, insertInto: managedObjectContext)
+        
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         id = try container.decode(Int.self, forKey: .id)

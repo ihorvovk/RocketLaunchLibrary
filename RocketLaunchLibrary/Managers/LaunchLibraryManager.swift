@@ -20,10 +20,15 @@ class LaunchLibraryManager {
     
     func loadRocketLaunches(success: @escaping ([RocketLaunch]) -> Void, failure: @escaping (Swift.Error) -> Void) {
         let parameters: [String: Any] = ["mode": "list", "sort": "desc", "fields": "id,name", "limit": 1000000]
-        AF.request(apiURL, parameters: parameters).validate().responseDecodable(completionHandler: { (response: DataResponse<RocketLaunchList, AFError>) in
+        let decoder = JSONDecoder()
+        if let delegate = UIApplication.shared.delegate as? AppDelegate, let managedObjectContextKey = CodingUserInfoKey(rawValue: "managedObjectContext") {
+            decoder.userInfo[managedObjectContextKey] = delegate.persistentContainer.viewContext
+        }
+        
+        AF.request(apiURL, parameters: parameters).validate().responseDecodable(decoder: decoder, completionHandler: { (response: DataResponse<RocketLaunchList, AFError>) in
             switch response.result {
             case .success(let result):
-                success(result.launches)
+                success(result.launchesArray)
             case .failure(let error):
                 failure(error)
             }
@@ -36,7 +41,7 @@ class LaunchLibraryManager {
             AF.request(self.apiURL, parameters: parameters).validate().responseDecodable(completionHandler: { (response: DataResponse<RocketLaunchList, AFError>) in
                 switch response.result {
                 case .success(let result):
-                    if let launch = result.launches.first {
+                    if let launch = result.launchesArray.first {
                         observer.onNext(launch)
                         observer.onCompleted()
                     } else {

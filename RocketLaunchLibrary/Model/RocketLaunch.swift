@@ -7,18 +7,19 @@
 //
 
 import Foundation
+import CoreData
 
-struct RocketLaunch: Decodable {
+final class RocketLaunch: NSManagedObject, Decodable {
     
-    let id: Int
-    let name: String
-    let net: Date?
-    let windowStart: Date?
-    let windowEnd: Date?
-    let country: String?
-    let status: Int?
+    @NSManaged var id: Int
+    @NSManaged var name: String
+    @NSManaged var net: Date?
+    @NSManaged var windowStart: Date?
+    @NSManaged var windowEnd: Date?
+    @NSManaged var country: String?
+    @NSManaged var status: Int
     
-    let rocket: Rocket?
+    @NSManaged var rocket: Rocket?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -31,7 +32,15 @@ struct RocketLaunch: Decodable {
         case rocket
     }
     
-    init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
+        guard let managedObjectContextKey = CodingUserInfoKey(rawValue: "managedObjectContext"),
+            let managedObjectContext = decoder.userInfo[managedObjectContextKey] as? NSManagedObjectContext,
+            let entity = NSEntityDescription.entity(forEntityName: "RocketLaunch", in: managedObjectContext) else {
+            fatalError("Failed to decode RocketLaunch")
+        }
+        
+        self.init(entity: entity, insertInto: managedObjectContext)
+        
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         id = try container.decode(Int.self, forKey: .id)
@@ -40,8 +49,12 @@ struct RocketLaunch: Decodable {
         windowStart = try? container.decode(Date.self, forKey: .windowStart)
         windowEnd = try? container.decode(Date.self, forKey: .windowEnd)
         country = try? container.decode(String.self, forKey: .country)
-        status = try? container.decode(Int.self, forKey: .status)
+ //       status = try container.decode(Int.self, forKey: .status)
         
         rocket = try? container.decode(Rocket.self, forKey: .rocket)
+    }
+    
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<RocketLaunch> {
+        return NSFetchRequest<RocketLaunch>(entityName: "RocketLaunch")
     }
 }
