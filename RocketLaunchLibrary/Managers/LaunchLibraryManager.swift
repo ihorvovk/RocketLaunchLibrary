@@ -38,7 +38,12 @@ class LaunchLibraryManager {
     func loadRocketLaunchDetails(id: Int) -> Observable<RocketLaunch> {
         return Observable.create { observer -> Disposable in
             let parameters: [String: Any] = ["mode": "verbose", "id": "\(id)"]
-            AF.request(self.apiURL, parameters: parameters).validate().responseDecodable(completionHandler: { (response: DataResponse<RocketLaunchList, AFError>) in
+            let decoder = JSONDecoder()
+            if let delegate = UIApplication.shared.delegate as? AppDelegate, let managedObjectContextKey = CodingUserInfoKey(rawValue: "managedObjectContext") {
+                decoder.userInfo[managedObjectContextKey] = delegate.persistentContainer.viewContext
+            }
+            
+            AF.request(self.apiURL, parameters: parameters).validate().responseDecodable(decoder: decoder, completionHandler: { (response: DataResponse<RocketLaunchList, AFError>) in
                 switch response.result {
                 case .success(let result):
                     if let launch = result.launchesArray.first {
